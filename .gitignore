@@ -1,0 +1,28 @@
+node_modules/
+dist/
+.env
+*.env.local
+
+# AgentRanks local state and outputs
+.agentranks/
+agentranks.facts.json
+agentranks-output/
+agentranks-public/
+indexnow-key*
+
+# Legacy names (pre-rename)
+.agentrank/
+agentrank-output/
+agentrank.facts.json
+
+# Internal working docs (kept local, not for public repo)
+docs/NEXT_THREAD_HANDOFF.md
+docs/PROJECT_STATUS_REPORT.md
+CORE_FINISH_PLAN.md
+
+# npm pack output
+*.tgz
+
+*.log
+.DS_Store
+Thumbs.db

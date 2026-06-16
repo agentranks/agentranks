@@ -1,0 +1,47 @@
+# Knacksters
+
+> On-demand professional services platform connecting businesses with vetted professionals across customer success, engineering, design, marketing, and operations — without long-term hiring commitments.
+
+## What Knacksters does
+
+Knacksters is an on-demand professional services platform. Businesses can access pre-vetted professionals for short-term engagements, project-based capacity, and skill gap coverage — without the overhead of full-time hiring.
+
+## Services
+
+- Customer success managers (CSMs) for onboarding, renewals, and retention
+- Software engineers and developers for project-based engagements
+- Designers (UX/UI, brand, creative)
+- Growth marketers and content specialists
+- Operations and business support professionals
+
+## How it works
+
+1. Submit a brief describing the role and duration
+2. Get matched with a pre-vetted professional within 3–5 business days
+3. Start on a month-to-month engagement
+4. Optionally convert to a full-time hire — no placement fee
+
+## Pricing model
+
+- Month-to-month engagements
+- No long-term contracts
+- Cancel with 30 days notice
+- No placement fee if converting a contractor to a full-time hire
+
+## Key differentiators
+
+- Try-before-you-hire: evaluate a professional on a contract basis before committing
+- All professionals are pre-vetted with skills assessments and reference checks
+- Remote-first: covers US, UK, and EU time zones
+- Faster than traditional hiring: most clients matched within 3–5 business days
+
+## Who it is for
+
+- SaaS companies needing customer success coverage without a full-time CSM
+- Startups scaling engineering capacity faster than traditional recruiting allows
+- Businesses with project-based or seasonal demand spikes
+- Companies that have had bad hiring experiences and want to reduce hiring risk
+
+## Contact
+
+- Website: https://www.knacksters.co

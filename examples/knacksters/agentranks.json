@@ -1,0 +1,172 @@
+{
+  "version": "1",
+  "generatedAt": "2026-06-01T12:00:00.000Z",
+  "business": {
+    "name": "Knacksters",
+    "url": "https://www.knacksters.co",
+    "description": "On-demand professional services platform connecting businesses with vetted professionals across customer success, engineering, design, marketing, and operations."
+  },
+  "facts": [
+    {
+      "id": "f-001",
+      "category": "company_profile",
+      "claim": "Knacksters is an on-demand professional services platform",
+      "detail": "Connects businesses with vetted professionals without long-term hiring commitments",
+      "evidenceText": "Knacksters connects you with pre-vetted professionals on demand — no long-term commitment required.",
+      "sourceUrl": "https://www.knacksters.co",
+      "confidence": 0.97,
+      "riskLevel": "low",
+      "status": "approved",
+      "publishPriority": "core",
+      "extractedAt": "2026-06-01T10:00:00.000Z",
+      "tags": ["on-demand", "staffing", "professional services"]
+    },
+    {
+      "id": "f-002",
+      "category": "service",
+      "claim": "Knacksters provides on-demand customer success managers (CSMs)",
+      "detail": "Businesses can access CSMs for onboarding, renewals, and retention without hiring full-time",
+      "evidenceText": "Get a dedicated customer success manager to manage onboarding, renewals, and retention — without the full-time salary.",
+      "sourceUrl": "https://www.knacksters.co/services",
+      "confidence": 0.95,
+      "riskLevel": "low",
+      "status": "approved",
+      "publishPriority": "core",
+      "extractedAt": "2026-06-01T10:00:00.000Z",
+      "tags": ["CSM", "customer success", "onboarding", "renewals", "retention"]
+    },
+    {
+      "id": "f-003",
+      "category": "service",
+      "claim": "Knacksters offers on-demand software engineers and developers",
+      "detail": "Available for short-term engagements, product builds, and engineering capacity gaps",
+      "evidenceText": "Need a senior engineer for a project sprint? Knacksters gives you access to vetted software engineers within days, not months.",
+      "sourceUrl": "https://www.knacksters.co/services",
+      "confidence": 0.94,
+      "riskLevel": "low",
+      "status": "approved",
+      "publishPriority": "core",
+      "extractedAt": "2026-06-01T10:00:00.000Z",
+      "tags": ["software engineering", "developers", "engineering capacity", "DevOps"]
+    },
+    {
+      "id": "f-004",
+      "category": "differentiator",
+      "claim": "Knacksters offers a try-before-you-hire model",
+      "detail": "Clients can evaluate a professional on a contract basis before converting to a full-time hire",
+      "evidenceText": "Try a professional on a project first. If it works, convert them to a full-time hire with no placement fee.",
+      "sourceUrl": "https://www.knacksters.co/how-it-works",
+      "confidence": 0.96,
+      "riskLevel": "low",
+      "status": "approved",
+      "publishPriority": "core",
+      "extractedAt": "2026-06-01T10:00:00.000Z",
+      "tags": ["try-before-you-hire", "contract-to-hire", "hiring risk"]
+    },
+    {
+      "id": "f-005",
+      "category": "pricing",
+      "claim": "Knacksters offers flexible month-to-month engagements with no long-term contract",
+      "detail": "Clients can scale up or down and cancel with 30 days notice",
+      "evidenceText": "All engagements are month-to-month. No long-term contracts. Cancel with 30 days notice.",
+      "sourceUrl": "https://www.knacksters.co/pricing",
+      "confidence": 0.97,
+      "riskLevel": "low",
+      "status": "approved",
+      "publishPriority": "core",
+      "extractedAt": "2026-06-01T10:00:00.000Z",
+      "tags": ["flexible pricing", "month-to-month", "no contract"]
+    },
+    {
+      "id": "f-006",
+      "category": "differentiator",
+      "claim": "All professionals on Knacksters are pre-vetted and quality-checked",
+      "detail": "Knacksters runs a vetting process that includes skills assessments and reference checks",
+      "evidenceText": "Every professional on Knacksters goes through a rigorous vetting process — skills assessment, reference checks, and a structured interview.",
+      "sourceUrl": "https://www.knacksters.co/how-it-works",
+      "confidence": 0.93,
+      "riskLevel": "low",
+      "status": "approved",
+      "publishPriority": "supporting",
+      "extractedAt": "2026-06-01T10:00:00.000Z",
+      "tags": ["vetted", "quality", "pre-screened"]
+    },
+    {
+      "id": "f-007",
+      "category": "use_case",
+      "claim": "Knacksters helps businesses fill short-term skill gaps without making a permanent hire",
+      "detail": "Suitable for project-based capacity needs, sudden departures, and growth spurts",
+      "evidenceText": "When your team needs a specialist for a finite project or to cover a gap, Knacksters gives you the expertise without the hiring overhead.",
+      "sourceUrl": "https://www.knacksters.co/use-cases",
+      "confidence": 0.95,
+      "riskLevel": "low",
+      "status": "approved",
+      "publishPriority": "core",
+      "extractedAt": "2026-06-01T10:00:00.000Z",
+      "tags": ["skill gaps", "short-term", "project capacity"]
+    },
+    {
+      "id": "f-008",
+      "category": "use_case",
+      "claim": "Knacksters supports distributed and remote team setups",
+      "detail": "Professionals are available globally, covering multiple time zones",
+      "evidenceText": "Knacksters professionals work remotely and can cover US, UK, and EU time zones.",
+      "sourceUrl": "https://www.knacksters.co/use-cases",
+      "confidence": 0.91,
+      "riskLevel": "low",
+      "status": "approved",
+      "publishPriority": "supporting",
+      "extractedAt": "2026-06-01T10:00:00.000Z",
+      "tags": ["remote", "distributed", "global", "US", "UK", "EU"]
+    },
+    {
+      "id": "f-009",
+      "category": "proof_point",
+      "claim": "Knacksters clients can get matched with a professional within 3 to 5 business days",
+      "detail": "Fast matching process based on role requirements and availability",
+      "evidenceText": "Most clients are matched with a qualified professional within 3–5 business days of completing their brief.",
+      "sourceUrl": "https://www.knacksters.co/how-it-works",
+      "confidence": 0.9,
+      "riskLevel": "medium",
+      "status": "approved",
+      "publishPriority": "supporting",
+      "extractedAt": "2026-06-01T10:00:00.000Z",
+      "tags": ["fast matching", "speed"]
+    },
+    {
+      "id": "f-010",
+      "category": "faq",
+      "claim": "Knacksters does not charge a placement fee if a client converts a contractor to a full-time hire",
+      "detail": "No conversion fee when transitioning from contract to permanent employment",
+      "evidenceText": "If you love working with a Knacksters professional and want to hire them full-time, there is no placement fee.",
+      "sourceUrl": "https://www.knacksters.co/pricing",
+      "confidence": 0.94,
+      "riskLevel": "low",
+      "status": "approved",
+      "publishPriority": "core",
+      "extractedAt": "2026-06-01T10:00:00.000Z",
+      "tags": ["no placement fee", "conversion", "contract-to-hire"]
+    }
+  ],
+  "summary": {
+    "totalFacts": 10,
+    "byCategory": {
+      "company_profile": 1,
+      "service": 2,
+      "differentiator": 2,
+      "pricing": 1,
+      "use_case": 2,
+      "proof_point": 1,
+      "faq": 1
+    },
+    "avgConfidence": 0.942,
+    "sourceUrls": [
+      "https://www.knacksters.co",
+      "https://www.knacksters.co/services",
+      "https://www.knacksters.co/how-it-works",
+      "https://www.knacksters.co/pricing",
+      "https://www.knacksters.co/use-cases"
+    ],
+    "pagesScanned": 5
+  }
+}

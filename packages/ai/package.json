@@ -1,0 +1,36 @@
+{
+  "name": "@agentranks/ai",
+  "version": "0.2.0",
+  "type": "module",
+  "description": "AgentRanks — LLM-powered business fact extraction",
+  "license": "MIT",
+  "homepage": "https://agentranks.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agentranks/agentranks.git"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+            "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rimraf dist",
+    "test": "tsc && cd dist && node --test"
+  },
+  "dependencies": {
+    "@agentranks/core": "workspace:*",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "rimraf": "^5.0.7",
+    "typescript": "^5.4.5"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "name": "agentranks",
+  "version": "0.2.0",
+  "type": "module",
+  "description": "AgentRanks CLI — build an AI-readable source of truth for your business",
+  "license": "MIT",
+  "homepage": "https://agentranks.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agentranks/agentranks.git"
+  },
+  "bugs": {
+    "url": "https://github.com/agentranks/agentranks/issues"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "ai",
+    "llm",
+    "seo",
+    "geo",
+    "ai-search",
+    "structured-data",
+    "llms-txt",
+    "schema-org",
+    "cli",
+    "agent"
+  ],
+  "files": [
+    "dist/index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "main": "dist/index.js",
+  "bin": {
+    "agentranks": "dist/index.js",
+    "agentrank": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc --noEmit && tsup",
+    "build:test": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rimraf dist",
+    "start": "node dist/index.js",
+    "prepack": "node scripts/prepare-pack.mjs && tsup",
+    "postpack": "node scripts/cleanup-pack.mjs",
+    "test": "npm run build:test && cd dist && node --test"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.5",
+    "ora": "^8.0.1",
+    "prompts": "^2.4.2",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@agentranks/ai": "workspace:*",
+    "@agentranks/core": "workspace:*",
+    "@agentranks/crawler": "workspace:*",
+    "@agentranks/publisher": "workspace:*",
+    "@rollup/rollup-win32-arm64-msvc": "^4.61.1",
+    "@types/node": "^20.14.0",
+    "@types/prompts": "^2.4.9",
+    "rimraf": "^5.0.7",
+    "tsup": "^8.5.1",
+    "typescript": "^5.4.5"
+  }
+}

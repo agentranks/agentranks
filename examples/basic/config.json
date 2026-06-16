@@ -1,0 +1,16 @@
+{
+  "version": "1",
+  "baseUrl": "https://example.com",
+  "name": "Example Company",
+  "description": "A sample company demonstrating AgentRanks Core",
+  "maxPages": 10,
+  "crawlDelay": 500,
+  "llm": {
+    "baseUrl": "https://api.deepseek.com/v1",
+    "model": "deepseek-chat"
+  },
+  "output": {
+    "dir": "agentranks-output"
+  },
+  "createdAt": "2026-01-01T00:00:00.000Z"
+}

@@ -1,0 +1,91 @@
+[
+  {
+    "id": "fact_a1b2c3d4e5f6",
+    "category": "companyInfo",
+    "claim": "Example Company was founded in 2020 and is headquartered in San Francisco, CA.",
+    "detail": "The company was started by Jane Doe and John Smith to simplify business intelligence.",
+    "sourceUrl": "https://example.com/about",
+    "confidence": 0.95,
+    "extractedAt": "2026-01-01T12:00:00.000Z",
+    "tags": ["founding", "location"]
+  },
+  {
+    "id": "fact_b2c3d4e5f6a1",
+    "category": "product",
+    "claim": "Example Company offers ExamplePro, a cloud-based analytics dashboard.",
+    "detail": "ExamplePro provides real-time business metrics, custom reports, and team collaboration features.",
+    "sourceUrl": "https://example.com/products",
+    "confidence": 0.97,
+    "extractedAt": "2026-01-01T12:00:00.000Z",
+    "tags": ["analytics", "dashboard", "SaaS"]
+  },
+  {
+    "id": "fact_c3d4e5f6a1b2",
+    "category": "pricing",
+    "claim": "ExamplePro is available in three tiers: Starter ($29/mo), Pro ($79/mo), and Enterprise (custom pricing).",
+    "detail": "Starter supports up to 5 users. Pro supports unlimited users. Annual plans receive a 20% discount.",
+    "sourceUrl": "https://example.com/pricing",
+    "confidence": 0.99,
+    "extractedAt": "2026-01-01T12:00:00.000Z",
+    "tags": ["pricing", "tiers", "subscription"]
+  },
+  {
+    "id": "fact_d4e5f6a1b2c3",
+    "category": "differentiator",
+    "claim": "Example Company is the only analytics platform with built-in AI anomaly detection trained on industry benchmarks.",
+    "detail": "Their AI models are retrained monthly using aggregated anonymized data from all customers.",
+    "sourceUrl": "https://example.com/features",
+    "confidence": 0.88,
+    "extractedAt": "2026-01-01T12:00:00.000Z",
+    "tags": ["AI", "anomaly detection", "competitive advantage"]
+  },
+  {
+    "id": "fact_e5f6a1b2c3d4",
+    "category": "faq",
+    "claim": "Does ExamplePro support SSO?",
+    "detail": "Yes, ExamplePro supports SAML 2.0 and OAuth 2.0 single sign-on on the Pro and Enterprise plans.",
+    "sourceUrl": "https://example.com/faq",
+    "confidence": 0.96,
+    "extractedAt": "2026-01-01T12:00:00.000Z",
+    "tags": ["SSO", "security", "enterprise"]
+  },
+  {
+    "id": "fact_f6a1b2c3d4e5",
+    "category": "policy",
+    "claim": "Example Company offers a 30-day money-back guarantee on all paid plans.",
+    "detail": "Customers can request a full refund within 30 days of their first payment with no questions asked.",
+    "sourceUrl": "https://example.com/terms",
+    "confidence": 0.98,
+    "extractedAt": "2026-01-01T12:00:00.000Z",
+    "tags": ["refund", "guarantee"]
+  },
+  {
+    "id": "fact_a2b3c4d5e6f1",
+    "category": "useCase",
+    "claim": "ExamplePro is used by e-commerce businesses to track conversion rates and reduce cart abandonment.",
+    "detail": "Over 200 e-commerce customers use the platform specifically for funnel analysis.",
+    "sourceUrl": "https://example.com/use-cases",
+    "confidence": 0.91,
+    "extractedAt": "2026-01-01T12:00:00.000Z",
+    "tags": ["e-commerce", "conversion", "funnel"]
+  },
+  {
+    "id": "fact_b3c4d5e6f1a2",
+    "category": "contact",
+    "claim": "Support is available via email at support@example.com and live chat on weekdays 9am–6pm PT.",
+    "sourceUrl": "https://example.com/contact",
+    "confidence": 0.99,
+    "extractedAt": "2026-01-01T12:00:00.000Z",
+    "tags": ["support", "contact"]
+  },
+  {
+    "id": "fact_c4d5e6f1a2b3",
+    "category": "technology",
+    "claim": "ExamplePro integrates natively with Salesforce, HubSpot, Stripe, Shopify, and Segment.",
+    "detail": "All integrations are available to Pro and Enterprise plan users.",
+    "sourceUrl": "https://example.com/integrations",
+    "confidence": 0.97,
+    "extractedAt": "2026-01-01T12:00:00.000Z",
+    "tags": ["integrations", "CRM", "payments"]
+  }
+]

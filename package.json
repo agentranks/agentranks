@@ -1,0 +1,23 @@
+{
+  "name": "agentranks",
+  "version": "0.2.0",
+  "private": true,
+  "description": "AgentRanks — AI-readable business source of truth toolkit",
+  "homepage": "https://agentranks.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agentranks/agentranks.git"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r dev",
+    "lint": "pnpm -r --if-present lint",
+    "test": "pnpm -r test",
+    "clean": "pnpm -r clean",
+    "agentranks": "node packages/cli/dist/index.js"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^5.4.5"
+  }
+}
