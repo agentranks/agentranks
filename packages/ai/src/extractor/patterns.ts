@@ -83,3 +83,35 @@ export const VAGUE_PATTERNS: RegExp[] = [
   /offers solutions/i,
   /provides services/i,
 ];
+
+// ─── Review reasons ───────────────────────────────────────────────────────────
+
+/**
+ * Stable reason codes mapped to human-readable explanations.
+ * Set on a fact when the engine flags it for review or elevated risk.
+ * Reasons are deterministic (derived from the rule that fired) — no LLM.
+ * Kept generic-but-specific: the claim text is shown alongside in the UI, so
+ * the reviewer can see the offending phrase without it being interpolated here.
+ */
+export const REVIEW_REASONS = {
+  /** CLAIM_ESCALATION_PATTERNS matched — superlative/performance claim. */
+  SUPERLATIVE_UNSUBSTANTIATED:
+    "Superlative or performance claim that's hard to independently verify.",
+  /** MEDIUM_RISK_PATTERNS matched — counts/certifications/compliance. */
+  MEDIUM_RISK_CLAIM:
+    "Claim that's plausibly verifiable but easily inflated (customer counts, certifications, compliance).",
+  /** proof_point category with weak supporting evidence. */
+  PROOF_POINT_WEAK_EVIDENCE:
+    "Proof point without strong supporting evidence.",
+  /** Evidence quote too short or missing the numbers in the claim. */
+  WEAK_EVIDENCE:
+    "Evidence quote is too short or doesn't back up the numbers in the claim.",
+  /** LLM extractor returned a high-risk classification. */
+  HIGH_RISK_EXTRACTOR:
+    "Flagged by the extractor as a higher-risk claim.",
+  /** Policy statement extracted with low confidence. */
+  POLICY_LOW_CONFIDENCE:
+    "Policy statement extracted with low confidence — worth confirming.",
+} as const;
+
+export type ReviewReasonCode = keyof typeof REVIEW_REASONS;

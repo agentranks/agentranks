@@ -61,6 +61,14 @@ export const BusinessFactSchema = z.object({
   publishPriority: PublishPrioritySchema,
   extractedAt: z.string().datetime(),
   tags: z.array(z.string()).optional(),
+  /**
+   * Human-readable explanation set by the engine when a fact is flagged for
+   * review or carries elevated risk. Optional/nullable: present only on flagged
+   * facts. Declared here (not just in Cloud) so the field survives the
+   * extract → review round-trip through agentranks.facts.json.
+   */
+  reviewReason: z.string().nullable().optional(),
+  reviewReasonCode: z.string().nullable().optional(),
 });
 
 export type BusinessFact = z.infer<typeof BusinessFactSchema>;
@@ -92,6 +100,8 @@ export const RawFactSchema = z.object({
   status: FactStatusSchema.optional(),
   publishPriority: PublishPrioritySchema.optional(),
   tags: z.array(z.string()).optional(),
+  reviewReason: z.string().nullable().optional(),
+  reviewReasonCode: z.string().nullable().optional(),
 });
 
 export type RawFact = z.infer<typeof RawFactSchema>;

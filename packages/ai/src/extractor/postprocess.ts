@@ -14,28 +14,44 @@ import {
   INCOMPLETE_ANSWER_PATTERNS,
   LEGAL_URL_PATTERNS,
   VAGUE_PATTERNS,
+  REVIEW_REASONS,
+  type ReviewReasonCode,
 } from "./patterns.js";
 
 // ─── Risk scoring ─────────────────────────────────────────────────────────────
 
-function determineRiskLevel(fact: RawFact, category: string): RiskLevel {
+interface RiskAssessment {
+  level: RiskLevel;
+  /** Reason code for the risk dimension (absent when low risk). */
+  code?: ReviewReasonCode;
+}
+
+function determineRiskLevel(fact: RawFact, category: string): RiskAssessment {
   const text = `${fact.claim} ${fact.detail ?? ""} ${fact.evidenceText ?? ""}`;
 
-  if (CLAIM_ESCALATION_PATTERNS.some((p) => p.test(text))) return "high";
-
-  if (category === "proof_point") {
-    return CLAIM_ESCALATION_PATTERNS.some((p) => p.test(text)) ? "high" : "medium";
+  if (CLAIM_ESCALATION_PATTERNS.some((p) => p.test(text))) {
+    return { level: "high", code: "SUPERLATIVE_UNSUBSTANTIATED" };
   }
 
-  if (MEDIUM_RISK_PATTERNS.some((p) => p.test(text))) return "medium";
+  if (category === "proof_point") {
+    return CLAIM_ESCALATION_PATTERNS.some((p) => p.test(text))
+      ? { level: "high", code: "SUPERLATIVE_UNSUBSTANTIATED" }
+      : { level: "medium", code: "MEDIUM_RISK_CLAIM" };
+  }
 
-  if (category === "policy" && fact.confidence < 0.85) return "medium";
+  if (MEDIUM_RISK_PATTERNS.some((p) => p.test(text))) {
+    return { level: "medium", code: "MEDIUM_RISK_CLAIM" };
+  }
+
+  if (category === "policy" && fact.confidence < 0.85) {
+    return { level: "medium", code: "POLICY_LOW_CONFIDENCE" };
+  }
 
   const llmRisk = fact.riskLevel;
-  if (llmRisk === "high") return "high";
-  if (llmRisk === "medium") return "medium";
+  if (llmRisk === "high") return { level: "high", code: "HIGH_RISK_EXTRACTOR" };
+  if (llmRisk === "medium") return { level: "medium", code: "MEDIUM_RISK_CLAIM" };
 
-  return "low";
+  return { level: "low" };
 }
 
 // ─── Publish priority ─────────────────────────────────────────────────────────
@@ -125,6 +141,8 @@ export function enrichFact(raw: RawFact, sourceUrl: string, now: string): Busine
     publishPriority: (raw.publishPriority ?? "supporting") as PublishPriority,
     extractedAt: now,
     tags: raw.tags,
+    reviewReason: raw.reviewReason,
+    reviewReasonCode: raw.reviewReasonCode,
   };
 }
 
@@ -165,27 +183,38 @@ export function postProcessFacts(
       }
     }
 
-    const riskLevel = determineRiskLevel(fact, fact.category);
+    const { level: riskLevel, code: riskCode } = determineRiskLevel(fact, fact.category);
+    const claimEscalated = CLAIM_ESCALATION_PATTERNS.some((p) => p.test(combined));
+    const weakEvidence = hasWeakEvidence(fact, fact.category);
 
     let status: "extracted" | "needs_review";
-    if (CLAIM_ESCALATION_PATTERNS.some((p) => p.test(combined))) {
+    let reasonCode: ReviewReasonCode | undefined;
+
+    // Precedence (first match wins): claim escalation > proof-point weak >
+    // weak evidence > high risk. Each branch sets the review reason that best
+    // explains WHY the fact was flagged.
+    if (claimEscalated) {
       status = "needs_review";
-    } else if (fact.category === "proof_point" && hasWeakEvidence(fact, fact.category)) {
+      reasonCode = "SUPERLATIVE_UNSUBSTANTIATED";
+    } else if (fact.category === "proof_point" && weakEvidence) {
       // Only flag proof points that lack strong supporting evidence; a
       // well-evidenced proof point (e.g. a named customer count with a solid
       // quote) does not need extra review.
       status = "needs_review";
-    } else if (hasWeakEvidence(fact, fact.category)) {
+      reasonCode = "PROOF_POINT_WEAK_EVIDENCE";
+    } else if (weakEvidence) {
       status = "needs_review";
+      reasonCode = "WEAK_EVIDENCE";
     } else if (riskLevel === "high") {
       status = "needs_review";
+      reasonCode = riskCode ?? "HIGH_RISK_EXTRACTOR";
     } else {
       status = "extracted";
+      // Elevated-risk (but not needs_review) facts still carry an explanation.
+      if (riskLevel !== "low") reasonCode = riskCode;
     }
 
-    const finalCategory = CLAIM_ESCALATION_PATTERNS.some((p) => p.test(combined))
-      ? "claim"
-      : fact.category;
+    const finalCategory = claimEscalated ? "claim" : fact.category;
 
     const publishPriority = determinePublishPriority(
       finalCategory,
@@ -203,6 +232,8 @@ export function postProcessFacts(
       confidence: status === "needs_review" && finalCategory === "claim"
         ? Math.min(fact.confidence, 0.75)
         : fact.confidence,
+      reviewReason: reasonCode ? REVIEW_REASONS[reasonCode] : undefined,
+      reviewReasonCode: reasonCode,
     });
   }
 

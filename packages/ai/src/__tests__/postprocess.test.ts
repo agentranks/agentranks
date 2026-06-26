@@ -224,6 +224,68 @@ describe("Evidence quality", () => {
   });
 });
 
+// ─── Review reasons ───────────────────────────────────────────────────────────
+
+describe("Review reasons", () => {
+  it("sets a reviewReason on a claim-escalated (needs_review) fact", () => {
+    const { facts } = postProcessFacts([
+      makeRawFact({
+        claim: "We are the industry-leading staffing platform.",
+        evidenceText: "the industry-leading staffing platform",
+      }),
+    ], SOURCE_URL);
+
+    assert.equal(facts[0].status, "needs_review");
+    assert.ok(facts[0].reviewReason, "flagged fact must carry a reviewReason");
+    assert.equal(facts[0].reviewReasonCode, "SUPERLATIVE_UNSUBSTANTIATED");
+  });
+
+  it("sets a reviewReason on a medium-risk (extracted) fact", () => {
+    const { facts } = postProcessFacts([
+      makeRawFact({
+        claim: "Trusted by over 500 enterprise customers.",
+        evidenceText: "Join 500+ enterprise customers using the platform.",
+        confidence: 0.82,
+      }),
+    ], SOURCE_URL);
+
+    assert.equal(facts[0].status, "extracted");
+    assert.equal(facts[0].riskLevel, "medium");
+    assert.ok(facts[0].reviewReason, "medium-risk fact should carry a reviewReason");
+    assert.equal(facts[0].reviewReasonCode, "MEDIUM_RISK_CLAIM");
+  });
+
+  it("does NOT set a reviewReason on a clean low-risk fact", () => {
+    const { facts } = postProcessFacts([
+      makeRawFact({
+        category: "service",
+        claim: "Knacksters provides on-demand staffing for tech teams.",
+        evidenceText: "on-demand staffing for tech teams at Knacksters",
+        confidence: 0.9,
+      }),
+    ], SOURCE_URL);
+
+    assert.equal(facts[0].status, "extracted");
+    assert.equal(facts[0].riskLevel, "low");
+    assert.equal(facts[0].reviewReason, undefined);
+    assert.equal(facts[0].reviewReasonCode, undefined);
+  });
+
+  it("prefers the claim-escalation reason when multiple rules could apply", () => {
+    // "industry-leading" escalates; the claim also contains a number ("10x")
+    // which would otherwise be a medium-risk match — escalation must win.
+    const { facts } = postProcessFacts([
+      makeRawFact({
+        claim: "We deliver industry-leading results with 10,000+ deployments.",
+        evidenceText: "industry-leading results with 10,000+ deployments",
+      }),
+    ], SOURCE_URL);
+
+    assert.equal(facts[0].reviewReasonCode, "SUPERLATIVE_UNSUBSTANTIATED");
+    assert.equal(facts[0].status, "needs_review");
+  });
+});
+
 // ─── publishPriority ───────────────────────────────────────────────────────────
 
 describe("publishPriority", () => {
