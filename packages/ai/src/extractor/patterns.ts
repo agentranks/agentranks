@@ -2,14 +2,22 @@ import { FactCategorySchema } from "@agentranks/core";
 
 export const VALID_CATEGORIES = new Set<string>(FactCategorySchema.options);
 
-/** Patterns that always escalate a fact into the `claim` category at high risk. */
+/**
+ * Patterns that always escalate a fact into the `claim` category at high risk.
+ * Limited to genuine superlative, comparative, or hard-to-verify performance
+ * claims. Verifiable certifications (SOC 2, ISO, HIPAA, GDPR), case studies,
+ * testimonials, and bare guarantees are intentionally NOT here — those are
+ * source-backed and should not carry high review burden.
+ */
 export const CLAIM_ESCALATION_PATTERNS: RegExp[] = [
   /\bROI\b/,
   /\bchurn reduction\b/i,
   /\bNRR improvement\b/i,
   /\bpass rate\b/i,
   /\bonly platform\b/i,
-  /\bbest\b/i,
+  /\bbest.?in.?class\b/i,
+  /\bthe best\b/i,
+  /\bbest\s+(platform|product|service|solution|option|choice|on the market)\b/i,
   /\bworld.?class\b/i,
   /\belite\b/i,
   /\bproven track record\b/i,
@@ -18,30 +26,23 @@ export const CLAIM_ESCALATION_PATTERNS: RegExp[] = [
   /\btop.?rated\b/i,
   /\bno quality compromises?\b/i,
   /\d+(\.\d+)?\/5\s*(rating|stars?)?/i,
-  /\d[\d,]+\s*\+?\s*(clients?|customers?|companies|enterprises?)\b/i,
-  /\d[\d,]+\s*\+?\s*hours?\b/i,
-  /\d[\d,]+\s*\+?\s*(professionals?|talent|experts?)\b/i,
-  /enterprise.?grade security/i,
-  /\bSOC\s*2\b/i,
-  /\bGDPR.compliant\b/i,
-  /\bISO\s*\d+\b/i,
-  /\bhipaa\b/i,
   /\bSLA guarantee\b/i,
-  /\b(guaranteed|guarantee)\b/i,
   /\b\d+%\s*(uptime|availability)\b/i,
-  /\bcase stud(y|ies)\b/i,
-  /\btestimon/i,
 ];
 
-/** Patterns that escalate to medium risk. */
+/**
+ * Patterns that escalate to medium risk — claims that are plausibly verifiable
+ * but easily inflated or worth a quick human glance. Topic words such as
+ * "secure"/"security" are intentionally excluded to avoid flagging every
+ * security-related statement.
+ */
 export const MEDIUM_RISK_PATTERNS: RegExp[] = [
-  /\d[\d,]+\s*\+?\s*(users?|customers?|clients?)\b/i,
+  /\d[\d,]+\s*\+?\s*(users?|customers?|clients?|companies|enterprises?)\b/i,
+  /\d[\d,]+\s*\+?\s*hours?\b/i,
+  /\d[\d,]+\s*\+?\s*(professionals?|talent|experts?)\b/i,
   /\baverage\s+rating\b/i,
   /\bcertif(ied|ication)\b/i,
   /\bcomplian(t|ce)\b/i,
-  /\bsecure\b/i,
-  /\bsecurity\b/i,
-  /\baudit(ed)?\b/i,
   /\baccredited\b/i,
   /\bnamed.+partner\b/i,
 ];

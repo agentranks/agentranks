@@ -170,7 +170,10 @@ export function postProcessFacts(
     let status: "extracted" | "needs_review";
     if (CLAIM_ESCALATION_PATTERNS.some((p) => p.test(combined))) {
       status = "needs_review";
-    } else if (fact.category === "proof_point") {
+    } else if (fact.category === "proof_point" && hasWeakEvidence(fact, fact.category)) {
+      // Only flag proof points that lack strong supporting evidence; a
+      // well-evidenced proof point (e.g. a named customer count with a solid
+      // quote) does not need extra review.
       status = "needs_review";
     } else if (hasWeakEvidence(fact, fact.category)) {
       status = "needs_review";

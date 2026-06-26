@@ -96,7 +96,7 @@ describe("Deterministic risk scoring", () => {
     assert.equal(facts[0].status, "needs_review");
   });
 
-  it("escalates GDPR compliance claim to high risk", () => {
+  it("escalates GDPR/compliance claim to medium risk (verifiable, not high)", () => {
     const { facts } = postProcessFacts([
       makeRawFact({
         claim: "The platform is GDPR-compliant and SOC 2 certified.",
@@ -105,8 +105,9 @@ describe("Deterministic risk scoring", () => {
       }),
     ], SOURCE_URL);
 
-    assert.equal(facts[0].riskLevel, "high");
-    assert.equal(facts[0].status, "needs_review");
+    // Certifications/compliance are verifiable → medium, not high; source-backed so extracted.
+    assert.equal(facts[0].riskLevel, "medium");
+    assert.equal(facts[0].status, "extracted");
   });
 
   it("escalates 'top-tier' claim to high risk and claim category", () => {
@@ -134,7 +135,7 @@ describe("Deterministic risk scoring", () => {
     assert.equal(facts[0].riskLevel, "high");
   });
 
-  it("escalates 'guaranteed' to high risk and needs_review", () => {
+  it("flags 'guaranteed within X hours' as medium (verifiable promise), not high", () => {
     const { facts } = postProcessFacts([
       makeRawFact({
         claim: "Replacement candidates are guaranteed within 48 hours.",
@@ -142,15 +143,16 @@ describe("Deterministic risk scoring", () => {
       }),
     ], SOURCE_URL);
 
-    assert.equal(facts[0].riskLevel, "high");
-    assert.equal(facts[0].status, "needs_review");
+    // A service-level promise with a number is medium, source-backed → extracted.
+    assert.equal(facts[0].riskLevel, "medium");
+    assert.equal(facts[0].status, "extracted");
   });
 });
 
-// ─── proof_point always needs_review ──────────────────────────────────────────
+// ─── proof_point review depends on evidence quality ───────────────────────────
 
 describe("proof_point category", () => {
-  it("always sets proof_point facts to needs_review", () => {
+  it("flags proof_point facts with weak evidence for review", () => {
     const { facts } = postProcessFacts([
       makeRawFact({
         category: "proof_point",
@@ -162,6 +164,20 @@ describe("proof_point category", () => {
 
     assert.equal(facts[0].status, "needs_review");
     assert.equal(facts[0].riskLevel !== "low", true, "proof_point should not be low risk");
+  });
+
+  it("keeps a well-evidenced proof_point as extracted (no extra review)", () => {
+    const { facts } = postProcessFacts([
+      makeRawFact({
+        category: "proof_point",
+        claim: "Acme has served 1,200 customers across 14 countries since 2018.",
+        evidenceText: "1,200 customers across 14 countries since 2018",
+        confidence: 0.9,
+      }),
+    ], SOURCE_URL);
+
+    assert.equal(facts[0].status, "extracted");
+    assert.equal(facts[0].riskLevel, "medium");
   });
 });
 
